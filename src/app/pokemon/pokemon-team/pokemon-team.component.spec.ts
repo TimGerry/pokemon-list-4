@@ -1,7 +1,7 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { PokemonTeamComponent } from './pokemon-team.component';
-import { PokemonService } from '../../services/pokemon.service';
+import { PokemonService } from '../services/pokemon.service';
 import { of } from 'rxjs';
 
 describe('PokemonTeamComponent', () => {

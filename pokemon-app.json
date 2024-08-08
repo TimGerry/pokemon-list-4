@@ -1,26 +1,34 @@
 {
   "pokemon": [
-  {
-    "id": "garchomp",
-    "name": "garchomp",
-    "type": "ground",
-    "type2": "dragon",
-    "attack": "outrage",
-    "level": 60
-  },
-  {
-    "id": "squirtle",
-    "name": "squirtle",
-    "type": "water",
-    "attack": "water gun",
-    "level": 5
-  },
-  {
-    "id": "magikarp",
-    "name": "magikarp",
-    "type": "water",
-    "attack": "splash",
-    "level": 100
-  }
-]
+    {
+      "id": "garchomp",
+      "name": "garchomp",
+      "type": "ground",
+      "type2": "dragon",
+      "attack": "outrage",
+      "level": 60
+    },
+    {
+      "id": "squirtle",
+      "name": "squirtle",
+      "type": "water",
+      "attack": "water gun",
+      "level": 5
+    },
+    {
+      "id": "magikarp",
+      "name": "magikarp",
+      "type": "water",
+      "attack": "splash",
+      "level": 100
+    },
+    {
+      "id": "mudkip",
+      "name": "mudkip",
+      "type": "water",
+      "type2": null,
+      "attack": "water gun",
+      "level": 5
+    }
+  ]
 }

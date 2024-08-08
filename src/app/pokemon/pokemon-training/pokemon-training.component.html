@@ -4,4 +4,6 @@
 @else {
     <h2>{{ pokemon.name }} is training!</h2>
     <img [src]="getPokemonImage(pokemon)" [alt]="pokemon.name">
+    <br>
+    <button (click)="quitTraining()">Quit training</button>
 }

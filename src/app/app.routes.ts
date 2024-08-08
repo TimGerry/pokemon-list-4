@@ -1,8 +1,8 @@
 import { Routes } from '@angular/router';
-import { PokemonTeamComponent } from './components/pokemon-team/pokemon-team.component';
-import { PokemonStoreComponent } from './components/pokemon-store/pokemon-store.component';
-import { PokemonTrainingComponent } from './components/pokemon-training/pokemon-training.component';
-import { pokemonResolver } from './resolvers/pokemon.resolver';
+import { PokemonTeamComponent } from './pokemon/pokemon-team/pokemon-team.component';
+import { PokemonStoreComponent } from './pokemon/pokemon-store/pokemon-store.component';
+import { PokemonTrainingComponent } from './pokemon/pokemon-training/pokemon-training.component';
+import { pokemonResolver } from './pokemon/resolvers/pokemon.resolver';
 import { moneyGuard } from './guards/money.guard';
 
 export const routes: Routes = [

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { APP_TITLE } from './app.config';
 import { RouterOutlet } from '@angular/router';
 import { MenuComponent } from './components/menu/menu.component';
+import { PokemonModule } from './pokemon/pokemon.module';
 
 @Component({
   selector: 'app-root',
@@ -10,7 +11,8 @@ import { MenuComponent } from './components/menu/menu.component';
   imports: [
     CommonModule,
     MenuComponent,
-    RouterOutlet
+    RouterOutlet,
+    PokemonModule
   ],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'

@@ -7,4 +7,4 @@
     <app-pokemon-list [pokemonList]="pokemonList" (pokemonClicked)="attack($event)"></app-pokemon-list>
 }
 
-<app-pokemon-form></app-pokemon-form>
+<app-pokemon-form (add)="addPokemon($event)"></app-pokemon-form>

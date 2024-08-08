@@ -14,7 +14,7 @@
   <tbody>
     @for (pokemon of pokemonList; track pokemon.name) {
       <!-- <tr *ngFor=" let pokemon of pokemonList; track name" (click)="attack(pokemon)"> -->
-      <tr [routerLink]="[pokemon.name]">
+      <tr (click)="train(pokemon)">
         <td [class.fire]="pokemon.type === 'fire'">{{ pokemon.name }}</td>
         <td>{{ pokemon.type }}</td>
         <td>{{ pokemon.type2 | optional : '/' }}</td>
