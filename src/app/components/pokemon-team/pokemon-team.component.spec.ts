@@ -1,35 +1,44 @@
 import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 
 import { PokemonTeamComponent } from './pokemon-team.component';
+import { PokemonService } from '../../services/pokemon.service';
+import { of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 describe('PokemonTeamComponent', () => {
   let component: PokemonTeamComponent;
   let fixture: ComponentFixture<PokemonTeamComponent>;
   let nativeEl: HTMLElement;
+  let pokemonService: PokemonService;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PokemonTeamComponent]
+      imports: [PokemonTeamComponent],
+        providers: [
+          { provide: HttpClient, useValue: null }
+        ]
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(PokemonTeamComponent);
     component = fixture.componentInstance;
     nativeEl = fixture.nativeElement;
-    fixture.detectChanges();
+
+    pokemonService = TestBed.inject(PokemonService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should display pokémon', async () => {
+  fit('should display pokémon', async () => {
     // arrange
-    component.pokemonList = [
+    const testData = [
       { name: 'bulbasaur', type: 'grass', type2: 'poison', attack: 'razor leaf', level: 5 },
       { name: 'squirtle', type: 'water', attack: 'water gun', level: 5 }
     ];
-
+    spyOn(pokemonService, 'getAll').and.returnValue(of(testData));
+    
     // act
     fixture.detectChanges();
     await fixture.whenStable();
