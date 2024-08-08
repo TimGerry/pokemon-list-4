@@ -1,0 +1,7 @@
+@if (!pokemon) {
+    <app-loading></app-loading>
+}
+@else {
+    <h2>{{ pokemon.name }} is training!</h2>
+    <img [src]="getPokemonImage(pokemon)" [alt]="pokemon.name">
+}
