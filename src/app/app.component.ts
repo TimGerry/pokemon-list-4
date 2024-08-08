@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Pokemon } from './models/pokemon.model';
 import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { OptionalPipe } from './pipes/optional.pipe';
@@ -6,6 +6,7 @@ import { PokemonListComponent } from './components/pokemon-list/pokemon-list.com
 import { PokemonFormComponent } from './components/pokemon-form/pokemon-form.component';
 import { PokemonStoreComponent } from './components/pokemon-store/pokemon-store.component';
 import { PokemonTeamComponent } from './components/pokemon-team/pokemon-team.component';
+import { APP_TITLE } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -19,5 +20,6 @@ import { PokemonTeamComponent } from './components/pokemon-team/pokemon-team.com
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Pokémon list';
+
+  constructor(@Inject(APP_TITLE) public title: string) {}
 }
