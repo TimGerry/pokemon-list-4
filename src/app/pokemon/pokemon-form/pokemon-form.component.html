@@ -1,58 +1,66 @@
 <h2>Add a Pokémon!</h2>
 
-<form (submit)="submit()" [formGroup]="pokemonForm">
+<form (ngSubmit)="submit()" [formGroup]="pokemonForm">
     <div>
         <label for="pokemonNameInput">Name:</label>
         <input type="text" id="pokemonNameInput" formControlName="name">
         @if (pokemonForm.controls.name.touched && pokemonForm.controls.name.hasError('required')) {
-            <p class="text-danger">Name is required!</p>
+        <p class="text-danger">Name is required!</p>
         }
         @if (pokemonForm.controls.name.touched && pokemonForm.controls.name.hasError('minlength')) {
-            <p class="text-danger">Name must be at least 3 characters!</p>
+        <p class="text-danger">Name must be at least 3 characters!</p>
+        }
+        @if (pokemonForm.controls.name.touched && pokemonForm.controls.name.hasError('invalidPokemon')) {
+        <p class="text-danger">{{ pokemonForm.controls.name.getError('invalidPokemon')}}</p>
         }
     </div>
     <div>
         <label for="pokemonTypeInput">Type:</label>
         <input type="text" id="pokemonTypeInput" formControlName="type">
         @if (pokemonForm.controls.type.touched && pokemonForm.controls.type.hasError('required')) {
-            <p class="text-danger">Type is required!</p>
+        <p class="text-danger">Type is required!</p>
         }
         @if (pokemonForm.controls.type.touched && pokemonForm.controls.type.hasError('invalidType')) {
-            <p class="text-danger">{{ pokemonForm.controls.type.getError('invalidType') }}</p>
+        <p class="text-danger">{{ pokemonForm.controls.type.getError('invalidType') }}</p>
         }
     </div>
     <div>
         <label for="pokemonType2Input">Type 2:</label>
         <input type="text" id="pokemonType2Input" formControlName="type2">
-        @if (pokemonForm.controls.type2.touched && pokemonForm.controls.type2.hasError('invalidType')) {
-            <p class="text-danger">{{ pokemonForm.controls.type2.getError('invalidType') }}</p>
+        @if (pokemonForm.controls.type2?.touched && pokemonForm.controls.type2?.hasError('invalidType')) {
+        <p class="text-danger">{{ pokemonForm.controls.type2?.getError('invalidType') }}</p>
         }
-        @if (pokemonForm.controls.type.touched && pokemonForm.controls.type2.touched && pokemonForm.hasError('duplicateTypes')) {
-            <p class="text-danger">{{ pokemonForm.getError('duplicateTypes') }}</p>
+        @if (pokemonForm.controls.type.touched && pokemonForm.controls.type2?.touched &&
+        pokemonForm.hasError('duplicateTypes')) {
+        <p class="text-danger">{{ pokemonForm.getError('duplicateTypes') }}</p>
         }
     </div>
     <div>
         <label for="pokemonAttackInput">Attack:</label>
         <input type="text" id="pokemonAttackInput" formControlName="attack">
         @if (pokemonForm.controls.attack.touched && pokemonForm.controls.attack.hasError('required')) {
-            <p class="text-danger">Attack is required!</p>
+        <p class="text-danger">Attack is required!</p>
         }
     </div>
     <div>
         <label for="pokemonLevelInput">Level:</label>
         <input type="number" id="pokemonLevelInput" formControlName="level">
         @if (pokemonForm.controls.level.touched && pokemonForm.controls.level.hasError('required')) {
-            <p class="text-danger">Level is required!</p>
+        <p class="text-danger">Level is required!</p>
         }
         @if (pokemonForm.controls.level.touched && (
-            pokemonForm.controls.level.hasError('required') 
-            || pokemonForm.controls.level.hasError('min')
-            || pokemonForm.controls.level.hasError('max'))) {
-            <p class="text-danger">Level must be between 1 and 100!</p>
+        pokemonForm.controls.level.hasError('required')
+        || pokemonForm.controls.level.hasError('min')
+        || pokemonForm.controls.level.hasError('max'))) {
+        <p class="text-danger">Level must be between 1 and 100!</p>
         }
     </div>
 
-    <button [disabled]="pokemonForm.invalid">Add!</button>
-    <button type="reset">Reset</button>
+    @if (pokemonForm.pending) {
+        <app-loading></app-loading>
+    }
+
+    <button [disabled]="!pokemonForm.valid">Add!</button>
+    <button type="button" (click)="pokemonForm.reset()">Reset</button>
     <button type="button" (click)="log()">Log</button>
 </form>

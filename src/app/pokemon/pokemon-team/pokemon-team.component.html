@@ -1,3 +1,5 @@
+<app-pokemon-form (add)="addPokemon($event)"></app-pokemon-form>
+
 @if (!pokemonList) {
     <app-loading>
         <b>Loading!</b>
@@ -6,5 +8,3 @@
 @else {
     <app-pokemon-list [pokemonList]="pokemonList" (pokemonClicked)="attack($event)"></app-pokemon-list>
 }
-
-<app-pokemon-form (add)="addPokemon($event)"></app-pokemon-form>

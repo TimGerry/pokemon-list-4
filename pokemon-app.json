@@ -29,6 +29,22 @@
       "type2": null,
       "attack": "water gun",
       "level": 5
+    },
+    {
+      "id": "charmander",
+      "name": "charmander",
+      "type": "fire",
+      "type2": null,
+      "attack": "ember",
+      "level": 10
+    },
+    {
+      "id": "swampert",
+      "name": "swampert",
+      "type": "water",
+      "type2": "ground",
+      "attack": "earthquake",
+      "level": 36
     }
   ]
 }
