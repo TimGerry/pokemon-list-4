@@ -16,7 +16,8 @@ export class PokemonFormComponent implements OnInit {
 
   constructor(private nnfb: NonNullableFormBuilder) {
     this.pokemonForm = nnfb.group<PokemonForm>({
-      name: nnfb.control('mudkip', [Validators.required, Validators.minLength(3)], [pokemonValidator()]),
+      // name: nnfb.control('mudkip', [Validators.required, Validators.minLength(3)], [pokemonValidator()]),
+      name: nnfb.control('mudkip', [Validators.required, Validators.minLength(3)]),
       type: nnfb.control('', [Validators.required, typeValidator()]),
       type2: nnfb.control(undefined, [typeValidator()]),
       attack: nnfb.control('', Validators.required),
@@ -24,7 +25,8 @@ export class PokemonFormComponent implements OnInit {
     }, {
       validators: [duplicateTypeValidator()]
     });
-    this.pokemonForm.controls.name.disable();
+    // uncomment to see difference between value and raw value
+    // this.pokemonForm.controls.name.disable();
   }
 
   ngOnInit(): void {
@@ -80,7 +82,7 @@ const pokemonValidator: () => AsyncValidatorFn = () => {
     return ajax(`https://pokeapi.co/api/v2/pokemon/${name}`).pipe(
       map(_ => null),
       catchError(_ => of({ invalidPokemon: `${name} is not a valid Pokémon name!` })),
-      delay(2000)
+      // delay(2000)
     )
   }
 }
