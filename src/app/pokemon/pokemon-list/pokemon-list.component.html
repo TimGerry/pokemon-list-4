@@ -15,11 +15,11 @@
     @for (pokemon of pokemonList; track pokemon.name) {
       <!-- <tr *ngFor=" let pokemon of pokemonList; track name" (click)="attack(pokemon)"> -->
       <tr (click)="train(pokemon)">
-        <td [class.fire]="pokemon.type === 'fire'">{{ pokemon.name }}</td>
+        <td appHover="green" [class.fire]="pokemon.type === 'fire'">{{ pokemon.name }}</td>
         <td>{{ pokemon.type }}</td>
         <td>{{ pokemon.type2 | optional : '/' }}</td>
         <td>{{ pokemon.attack }}</td>
-        <td>{{ pokemon.level }}</td>
+        <td>{{ pokemon.level }} <p *appUnless="[pokemon.level > 100, pokemon.level < 1]" class="text-danger">CALL THE POLICE!!</p></td>
         <td><img class="miniature" [src]="getPokemonImage(pokemon)" [alt]="pokemon.name"></td>
       </tr>
     }
