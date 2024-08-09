@@ -1,10 +1,10 @@
 <app-pokemon-form (add)="addPokemon($event)"></app-pokemon-form>
 
-@if (!pokemonList) {
+<ng-container *ngIf="(pokemon$ | async) as pokemonList; else loading">
+    <app-pokemon-list [pokemonList]="pokemonList" (pokemonClicked)="attack($event)"></app-pokemon-list>
+</ng-container>
+<ng-template #loading>
     <app-loading>
         <b>Loading!</b>
     </app-loading>
-}
-@else {
-    <app-pokemon-list [pokemonList]="pokemonList" (pokemonClicked)="attack($event)"></app-pokemon-list>
-}
+</ng-template>

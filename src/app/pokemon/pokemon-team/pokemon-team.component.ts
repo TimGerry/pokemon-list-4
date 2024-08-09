@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Pokemon } from '../models/pokemon.model';
 import { PokemonService } from '../services/pokemon.service';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-pokemon-team',
@@ -8,26 +9,21 @@ import { PokemonService } from '../services/pokemon.service';
   styleUrl: './pokemon-team.component.scss',
 })
 export class PokemonTeamComponent implements OnInit {
-  pokemonList: Pokemon[] | undefined;
+  pokemon$!: Observable<Pokemon[] | undefined>;
 
   constructor(private pokemonService: PokemonService) {
     console.log('constructor!');
   }
 
   ngOnInit(): void {
-    console.log('oninit!');
-    this.loadData();
+    this.pokemon$ = this.pokemonService.pokemon$;
   }
 
   addPokemon(pokemonToAdd: Pokemon) {
-    this.pokemonService.add(pokemonToAdd).subscribe(() => this.loadData());
+    this.pokemonService.add(pokemonToAdd);
   }
 
   attack(pokemon: Pokemon) {
     window.alert(`${pokemon.name} used ${pokemon.attack}!`);
-  }
-
-  private loadData() {
-    this.pokemonService.getAll().subscribe(data => this.pokemonList = data);
   }
 }

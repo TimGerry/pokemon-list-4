@@ -28,7 +28,7 @@
       "type": "water",
       "type2": null,
       "attack": "water gun",
-      "level": 5
+      "level": 26
     },
     {
       "id": "charmander",
@@ -45,6 +45,14 @@
       "type2": "ground",
       "attack": "earthquake",
       "level": 36
+    },
+    {
+      "id": "deoxys-attack",
+      "name": "deoxys-attack",
+      "type": "psychic",
+      "type2": null,
+      "attack": "focus blast",
+      "level": 70
     }
   ]
 }

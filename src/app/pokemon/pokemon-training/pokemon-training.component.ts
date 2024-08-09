@@ -2,30 +2,38 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Pokemon } from '../models/pokemon.model';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { ActivatedRoute, Router } from '@angular/router';
+import { interval, Observable, Subscription, switchMap, tap } from 'rxjs';
+import { PokemonService } from '../services/pokemon.service';
 
 @Component({
   selector: 'app-pokemon-training',
   templateUrl: './pokemon-training.component.html',
   styleUrl: './pokemon-training.component.scss'
 })
-export class PokemonTrainingComponent implements OnInit, OnDestroy {
+export class PokemonTrainingComponent implements OnDestroy {
   pokemon: Pokemon | undefined;
   #song = new Audio('assets/pokemon-song.mp3');
+  #training = new Subscription();
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+  constructor(private route: ActivatedRoute, private router: Router, private pokemonService: PokemonService) {
     route.data.subscribe(data => this.pokemon = data['pokemon']);
-  }
-
-  ngOnInit(): void {
-    this.#song.play();
   }
 
   ngOnDestroy(): void {
     this.#song.pause();
   }
 
+  startTraining() {
+    this.#song.play();
+    this.#training.add(interval(1000).pipe(
+      switchMap(_ => this.pokemonService.train(this.pokemon!)),
+      tap(data => console.log('pokémon trained! level is ' + data.level))
+    ).subscribe(data => this.pokemon = data));
+  }
+
   quitTraining() {
     this.router.navigate(['/pokemon']);
+    this.#training?.unsubscribe();
   }
 
   // resolving method 2

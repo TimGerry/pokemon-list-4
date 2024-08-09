@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from '../models/pokemon.model';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, delay, Observable, tap } from 'rxjs';
 import { environment } from '../../../environments/environment';
 
 const BASE_URL = environment.baseUrl + '/pokemon';
@@ -11,17 +11,28 @@ const BASE_URL = environment.baseUrl + '/pokemon';
 })
 export class PokemonService {
 
-  constructor(private http: HttpClient) { }
+  #pokemonSubject = new BehaviorSubject<Pokemon[] | undefined>(undefined);
+  pokemon$ = this.#pokemonSubject.asObservable();
 
-  getAll(): Observable<Pokemon[]> {
-    return this.http.get<Pokemon[]>(BASE_URL);
-  }
+  constructor(private http: HttpClient) {
+    this.init();
+   }
 
   get(name: string): Observable<Pokemon> {
     return this.http.get<Pokemon>(`${BASE_URL}/${name}`);
   }
 
-  add(pokemon: Pokemon): Observable<Pokemon> {
-    return this.http.post<Pokemon>(BASE_URL, {...pokemon, id: pokemon.name.toLowerCase() });
+  add(pokemon: Pokemon): void {
+    this.http.post<Pokemon>(BASE_URL, { ...pokemon, id: pokemon.name.toLowerCase() })
+    .subscribe(_ => this.init());
+  }
+
+  train(pokemon: Pokemon): Observable<Pokemon> {
+    return this.http.put<Pokemon>(`${BASE_URL}/${pokemon.name}`, { ...pokemon, level: ++pokemon.level })
+    .pipe(tap(_ => this.init()));
+  }
+
+  private init = () => {
+    this.http.get<Pokemon[]>(BASE_URL).pipe(delay(1000)).subscribe(data => this.#pokemonSubject.next(data));
   }
 }

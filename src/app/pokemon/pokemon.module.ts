@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
+import { AsyncPipe, CommonModule, CurrencyPipe, DatePipe } from '@angular/common';
 import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
 import { PokemonTrainingComponent } from './pokemon-training/pokemon-training.component';
 import { PokemonTeamComponent } from './pokemon-team/pokemon-team.component';
@@ -18,7 +18,7 @@ import { UnlessDirective } from '../directives/unless.directive';
 @NgModule({
   declarations: [PokemonFormComponent, PokemonTrainingComponent, PokemonTeamComponent, PokemonListComponent, PokemonStoreComponent],
   imports: [
-    CommonModule, LoadingComponent, DatePipe, CurrencyPipe, OptionalPipe, RouterModule, ReactiveFormsModule, HoverDirective, UnlessDirective
+    CommonModule, LoadingComponent, DatePipe, CurrencyPipe, OptionalPipe, RouterModule, ReactiveFormsModule, HoverDirective, UnlessDirective, AsyncPipe
   ],
   providers: [PokemonService]
 })
